@@ -4,4 +4,10 @@ supabase
 flask
 PyPDF2
 requests
+google-generativeai
+PyMuPDF
+pdfplumber
 pdfminer.six
+langchain-community
+langchain-openai
+pillow
