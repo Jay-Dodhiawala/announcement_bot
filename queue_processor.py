@@ -66,6 +66,7 @@ from config import *
 from pdf_extractor import download_pdf_from_name
 from summary_generator import generate_summary
 from message_sender import AnnouncementMessageSender
+from financial_report_extraction import FinancialContentExtractor
 
 class QueueProcessor:
     def __init__(self, queue):
@@ -73,6 +74,7 @@ class QueueProcessor:
         self.supabase = create_client(SUPABASE_URL, SUPABASE_ANON_KEY)
         self.last_processed = {}  # Store last processed timestamp for each stock
         self.message_sender = AnnouncementMessageSender()
+        self.extractor = FinancialContentExtractor(os.getenv("GEMINI_API_KEY"))
 
     async def process_queue(self):
         while True:
@@ -86,6 +88,7 @@ class QueueProcessor:
 
                 stock_name = stock_data["stock_name"]
                 current_timestamp = stock_data["timestamp"]
+                is_financial_report = stock_data["is_financial_report"]
                 
                 # Check if we've processed this stock recently (within last 2 seconds)
                 if stock_name in self.last_processed:
@@ -111,7 +114,12 @@ class QueueProcessor:
                     if users:
                         logging.info(f"Found users for {stock_name}: {users}")
                         
-                        # Extract text from PDF
+                        # if is_financial_report:
+                        #     if(self.extractor.load_pdf(stock_data["pdf_name"])):
+                        #         content, tables = self.extractor.process_pdf()
+                        #         self.extractor.upload_results(stock_name, doc_id, pdf_name, supabase_client, content, category_name, subcategory_name, tables)
+                        # else:
+                        #Extract text from PDF
                         pdf_text = download_pdf_from_name(stock_data["pdf_name"])
                         
                         if pdf_text:
@@ -123,6 +131,7 @@ class QueueProcessor:
                                 announcement = {
                                     "stock_name": stock_name,
                                     "title": stock_data["title"],
+                                    "pdf_name": stock_data["pdf_name"],
                                     "summary": summary
                                 }
                                 

@@ -372,37 +372,37 @@ class FinancialContentExtractor:
             self.fitz_doc.close()
 
 
-# # Example usage
-api_key = os.getenv("GEMINI_API_KEY")
-# pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/a79f8511-fbee-457b-99a8-aaf468780c1a.pdf"
-pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/6dcf40b2-c9e2-47a6-8771-4338212fb286.pdf"
-pdf_name = "3bc577e6-caa7-44b8-a0da-efd6785ce4aa.pdf"
+# # # Example usage
+# api_key = os.getenv("GEMINI_API_KEY")
+# # pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/a79f8511-fbee-457b-99a8-aaf468780c1a.pdf"
+# pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/6dcf40b2-c9e2-47a6-8771-4338212fb286.pdf"
+# pdf_name = "3bc577e6-caa7-44b8-a0da-efd6785ce4aa.pdf"
 
-extractor = FinancialContentExtractor(api_key)
+# extractor = FinancialContentExtractor(api_key)
 
-try:
-    if extractor.load_pdf(pdf_name, is_url=True):
-        # Process the PDF
-        content, tables = extractor.process_pdf()
+# try:
+#     if extractor.load_pdf(pdf_name, is_url=True):
+#         # Process the PDF
+#         content, tables = extractor.process_pdf()
         
-        # Print full text content
-        print("\nDocument Content:")
-        print("=" * 50)
-        print('\n'.join(content))
+#         # Print full text content
+#         print("\nDocument Content:")
+#         print("=" * 50)
+#         print('\n'.join(content))
         
-        # Print extracted tables
-        print("\nExtracted Tables:")
-        print("=" * 50)
-        for table in tables:
-            print(f"\nTable from page {table['page_number']}:")
-            print("-" * 40)
-            print(table['table_data'])
-            # Image bytes are stored in table['image_bytes'] as base64
+#         # Print extracted tables
+#         print("\nExtracted Tables:")
+#         print("=" * 50)
+#         for table in tables:
+#             print(f"\nTable from page {table['page_number']}:")
+#             print("-" * 40)
+#             print(table['table_data'])
+#             # Image bytes are stored in table['image_bytes'] as base64
         
-        table_data = ''
-        for tab in tables:
-            table_data += tab['table_data'] + "\n\n ---------------------------------------------------------------------------------------------------\n\n"
+#         table_data = ''
+#         for tab in tables:
+#             table_data += tab['table_data'] + "\n\n ---------------------------------------------------------------------------------------------------\n\n"
                 
             
-finally:
-    extractor.close()
+# finally:
+#     extractor.close()

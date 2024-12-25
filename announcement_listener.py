@@ -64,12 +64,14 @@ class AnnouncementListener:
             stock_name = data.get("payload", {}).get("record", {}).get("stock_name")
             title = data.get("payload", {}).get("record", {}).get("title")
             pdf_name = data.get("payload", {}).get("record", {}).get("content")
+            is_financial_report = data.get("payload", {}).get("record", {}).get("is_financial_report")
             if stock_name:
                 logging.info(f"Adding stock to queue: {stock_name}")
                 stock_data = {
                     "stock_name": stock_name,
                     "title": title,
                     "pdf_name": pdf_name,
+                    "is_financial_report": is_financial_report,
                     "timestamp": datetime.now().isoformat()
                 }
                 self.queue.put(stock_data)
