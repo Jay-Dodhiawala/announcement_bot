@@ -376,7 +376,8 @@ class FinancialContentExtractor:
 # api_key = os.getenv("GEMINI_API_KEY")
 # # pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/a79f8511-fbee-457b-99a8-aaf468780c1a.pdf"
 # pdf_url = "https://www.bseindia.com/xml-data/corpfiling/AttachHis/6dcf40b2-c9e2-47a6-8771-4338212fb286.pdf"
-# pdf_name = "3bc577e6-caa7-44b8-a0da-efd6785ce4aa.pdf"
+# pdf_name = "e596a02f-4a02-4fd6-9763-c4975e215dd7.pdf"
+# # pdf_name = "3bc577e6-caa7-44b8-a0da-efd6785ce4aa.pdf"
 
 # extractor = FinancialContentExtractor(api_key)
 

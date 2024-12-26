@@ -15,7 +15,7 @@ def generate_summary(text: str, custom_prompt: Optional[str] = None) -> str:
             base_url="https://api.perplexity.ai"
         )
         
-        default_prompt = "You are a helpful assistant that summarizes corporate announcements. Provide concise, factual summaries focusing on key information and business impact.REMEMBER TO USE LAKHS OR CRORES wherever needed. DONT INCLUDE ANY CITATIONS OR REFERENCES"
+        default_prompt = "You are a helpful assistant that summarizes corporate announcements. Provide concise, factual summaries focusing on key information and business impact.REMEMBER TO USE LAKHS OR CRORES wherever needed. DONT INCLUDE ANY CITATIONS OR REFERENCES. PLEASE do not use any line breaks give me only one paragraph."
         system_prompt = custom_prompt or default_prompt
         
         full_prompt = f"{system_prompt}\n\nPlease provide a brief summary of this corporate announcement in 2-3 sentences AT THE MAX: {text[:4000]}"

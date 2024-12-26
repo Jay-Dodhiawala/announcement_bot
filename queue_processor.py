@@ -114,15 +114,24 @@ class QueueProcessor:
                     if users:
                         logging.info(f"Found users for {stock_name}: {users}")
                         
-                        # if is_financial_report:
-                        #     if(self.extractor.load_pdf(stock_data["pdf_name"])):
-                        #         content, tables = self.extractor.process_pdf()
-                        #         self.extractor.upload_results(stock_name, doc_id, pdf_name, supabase_client, content, category_name, subcategory_name, tables)
-                        # else:
-                        #Extract text from PDF
-                        pdf_text = download_pdf_from_name(stock_data["pdf_name"])
+                        # Extract text from PDF
+                        if is_financial_report:
+                            if self.extractor.load_pdf(stock_data["pdf_name"], is_url=True):
+                                # Process the PDF
+                                print(f"Processing financial data for {stock_data['pdf_name']}")
+                                content, tables = self.extractor.process_pdf()
+                                print("Content and table present")
+                                table_data = ''
+                                for tab in tables:
+                                    table_data += tab['table_data'] + "\n\n ---------------------------------------------------------------------------------------------------\n\n"
+
+                                pdf_text = self.extractor._clean_tables_data(table_data)
+                                print(f"pdf text: {pdf_text}")
+                        else:
+                            pdf_text = download_pdf_from_name(stock_data["pdf_name"])
                         
                         if pdf_text:
+                            
                             # Generate summary
                             summary = generate_summary(pdf_text)
                             

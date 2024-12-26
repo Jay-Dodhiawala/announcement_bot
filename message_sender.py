@@ -19,7 +19,7 @@ class AnnouncementMessageSender:
         self.app_name = os.getenv("GUPSHUP_APP_NAME")
         self.source = "919920660174"
         self.base_url = "https://api.gupshup.io/wa/api/v1"
-        self.template_id = "0c049490-a8ee-4398-b871-09a89ff981fa"
+        self.template_id = "c78337f0-df64-4b33-92b8-0d8f8a9f29d2"
 
     def _format_phone_number(self, phone: str) -> str:
         """Format phone number to match Gupshup requirements"""
@@ -60,6 +60,8 @@ class AnnouncementMessageSender:
                 "Content-Type": "application/x-www-form-urlencoded",
                 "apikey": self.api_key
             }
+
+            # print(json.dumps(payload, indent=2))
             
             logger.info(f"Sending template message to {destination}")
             logger.debug(f"Template payload: {json.dumps(payload, indent=2)}")
@@ -80,7 +82,7 @@ class AnnouncementMessageSender:
     def send_announcement(self, announcement: Dict, subscribers:list) -> None:
         """Send announcement to all subscribers of the stock"""
         try:
-            stock_name = f"📊 {announcement['stock_name']}"
+            stock_name = f"{announcement['stock_name']}"
             # subscribers = self.get_subscribers(announcement['stock_name'])
             
             if not subscribers:
